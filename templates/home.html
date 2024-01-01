@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>Task Management - Home</title>
+{% endblock %}
+{% block content %}
+<div>
+    <h1 class="text-center my-5">All Tasks</h1>
+    <div class="container mx-auto row row-cols-1 row-cols-md-3 row-cols-lg-4 justify-content-center gap-5">
+        {% for task in data %}
+        <div class="card text-center" style="max-width: 450px; min-width: 300px" >
+            <div class="card-header">
+              Task No : {{task.id}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{task.taskTitle}}</h5>
+              <p style="max-width: 400px; height: 300px;" class="card-text overflow-auto p-2">{{task.taskDescription}}</p>
+              {% if task.is_completed %}
+              <button class="btn btn-success">Completed</button>
+              {% else %}
+                <a href="#" class="btn btn-warning">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+              {% endif %}
+            </div>
+            <div class="card-footer text-body-secondary">
+              Assigned Date: {{task.assignDate}}
+            </div>
+          </div>
+          {% endfor %}
+    </div>
+</div>
+{% endblock %}
